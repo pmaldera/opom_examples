@@ -1,13 +1,13 @@
 function createNewCar()
 {
-    var carId = $('#idCar').value; // On va chercher la valeur de l'input avec l'id 'idCar' sur notre page
-    var carColor = $("couleurCar").value; // Idem pour l'id "couleurCar"
+    var carId = $('#idCar').val(); // On va chercher la valeur de l'input avec l'id 'idCar' sur notre page
+    var carColor = $("#couleurCar").val(); // Idem pour l'id "couleurCar"
     var selectElement = document.getElementById("brokenCar"); // Pareil mais sans jQuery, on va chercher le select ...
     var carBroken = selectElement.options[selectElement.selectedIndex].value; // Puis on récupère la valeur de l'élément selecté dans ce select
     var data = { // On crée l'objet qui va contenir les informations de notre requête 
         req: 1, // L'id de notre requête, notre api saura que l'id 1 sera pour créer une voiture
         id: carId, // L'id de notre voiture
-        color: carColor; // La couleur de notre voiture
+        color: carColor, // La couleur de notre voiture
         broken : 0 // Si la voiture est cassée
     };
     // On traduit ensuite la data récupérée en html, en js, pour dire si notre voiture est cassée ou non.
@@ -21,6 +21,7 @@ function createNewCar()
         data: data, // Avec les données qui on a définit plus haut
         success: function(result){ // Si on a une réponse, on met à jour la liste des voitures : il faudra TOUJOURS avoir une réponse, on la vérifera, si elle est négative: erreur, si elle est positive : action
             updateCarList(); // On met à jour la liste des voitures
+            console.log(result);
         }
       });
 }

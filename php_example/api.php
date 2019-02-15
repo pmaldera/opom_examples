@@ -16,13 +16,12 @@ if(isset($_POST) && isset($_POST['req'])) // Si on a un tableau de paramètres p
     $_POST['req'] = filter_var($_POST['req'],FILTER_VALIDATE_INT); // On filtre, si ce n'est pas un int, ça retourne faux.
     if($_POST['req'] == 1) // On crée une voiture en bdd
     {
-        
-        
         if(isset($_POST['id']) && isset($_POST['color']) && isset($_POST['broken']))
         {
             $_POST['id'] = filter_var($_POST['id'],FILTER_VALIDATE_INT); // On vérifie que c'est un int, sinon false
             $_POST['color'] = filter_var($_POST['color'],FILTER_SANITIZE_STRING); // On conserve que les données d'une string, sinon false
             $_POST['broken'] = filter_var($_POST['broken'],FILTER_VALIDATE_INT,array("options" => array("min_range"=>0, "max_range"=>1))); // On vérifie que c'est un int entre 0 et 1, sinon false
+            
             if($_POST['id'] != false && $_POST['color'] != false && $_POST['broken'] != false) // Si toutes les valeurs sont bonnes on continue
             {
                 $car = Car::create($_POST['id'],$_POST['color'], $_POST['broken']); // On crée une voiture avec les données obtenues
@@ -34,6 +33,8 @@ if(isset($_POST) && isset($_POST['req'])) // Si on a un tableau de paramètres p
             else // Sinon erreur
                 echo '0';
         }
+        else
+            echo '0';
     }
     else if ($_POST['req'] == 2) // On veut afficher les voitures
     {
