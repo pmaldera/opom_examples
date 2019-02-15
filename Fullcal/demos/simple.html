@@ -18,48 +18,48 @@
       now: '2018-04-07',
       editable: true, // enable draggable events
       aspectRatio: 1.8,
-      slotLabelFormat: ['MMMM','ddd D'],
+      slotLabelFormat: ['MMMM','ddd D'], // Affichage du mois en haut, des jours + nombre des jours ensuite
       scrollTime: '00:00', // undo default 6am scrollTime
       header: {
-        left: 'today prev,next',
+        left: 'today prev,next', // Boutons de navigations du planning
         center: 'title',
-        right: 'timelineYear, timelineMonth, listWeek'
+        right: 'timelineYear, timelineMonth, listWeek' // Filtre du planning
       },
-      defaultView: 'timelineYear',
+      defaultView: 'timelineYear', // Pour l'année entière
       views: {
         timelineYear: {
           type: 'timeline',
         }
       },
-      resourceLabelText: 'Organisation',
-      resourcesGroupField: 'groupId',
-      resourceColumns: [
+      resourceLabelText: 'Organisation', // Nom de la colone ressources
+      resourcesGroupField: 'groupId', // La donnée qui conteint le nombre du groupe de la ressource
+      resourceColumns: [ // les différentes colonnes de ressources
         {
           group: true,
           labelText: 'Groupe',
-          field: 'groupId'
+          field: 'groupId' // La donnée qui contient l'id du groupe
         },
         {
           labelText: 'Element',
-          field: 'title'
+          field: 'title' // La donnée qui contient le nom de l'élement
         },
         {
           labelText: 'Informations',
-          field: 'link'
+          field: 'link' // La donnée qui contient le lien de la colonne informations
         },
       ],
-      resources: [
+      resources: [ // Les ressources
         { id: 'a', groupId:'Conducteurs', title: 'Joseph' ,'link':'lien.php'},
         { id: 'a2', groupId:'Conducteurs', title: 'Jack' },
         { id: 'b', groupId:'Véhicule', title: 'Une belle 4L' },
         { id: 'b2', groupId:'Véhicule', title: 'Une deudeuche' },
       ],
-      events: [
-        { id: '1', resourceId: 'b', start: '2018-04-07T02:00:00', end: '2018-04-07T07:00:00', title: 'event 1' },
-        { id: '2', resourceId: 'c', start: '2018-04-07T05:00:00', end: '2018-04-07T22:00:00', title: 'event 2' },
-        { id: '3', resourceId: 'd', start: '2018-04-06', end: '2018-04-08', title: 'event 3' },
-        { id: '4', resourceId: 'e', start: '2018-04-07T03:00:00', end: '2018-04-07T08:00:00', title: 'event 4' },
-        { id: '5', resourceId: 'f', start: '2018-04-07T00:30:00', end: '2018-04-07T02:30:00', title: 'event 5' }
+      events: [ //Les évènements et les ressources auquelles ils sont attribués
+        { id: '1', resourceId: 'a', start: '2018-04-07T02:00:00', end: '2018-04-07T07:00:00', title: 'event 1' },
+        { id: '2', resourceId: 'a', start: '2018-04-07T05:00:00', end: '2018-04-07T22:00:00', title: 'event 2' },
+        { id: '3', resourceId: 'a2', start: '2018-04-06', end: '2018-04-08', title: 'event 3' },
+        { id: '4', resourceId: 'a2', start: '2018-04-07T03:00:00', end: '2018-04-07T08:00:00', title: 'event 4' },
+        { id: '5', resourceId: 'b', start: '2018-04-07T00:30:00', end: '2018-04-07T02:30:00', title: 'event 5' }
       ]
     });
   
