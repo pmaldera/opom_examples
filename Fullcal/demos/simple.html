@@ -11,13 +11,12 @@
 <script src='../lib/fr.js'></script>
 <script src='../scheduler.min.js'></script>
 <script>
-
   $(function() { // document ready
 
     $('#calendar').fullCalendar({
-      now: '2018-04-07',
+      now: '2019-02-28',
       editable: true, // enable draggable events
-      aspectRatio: 1.8,
+      aspectRatio: 4,
       slotLabelFormat: ['MMMM','ddd D'], // Affichage du mois en haut, des jours + nombre des jours ensuite
       scrollTime: '00:00', // undo default 6am scrollTime
       header: {
@@ -49,30 +48,51 @@
         },
       ],
       resources: [ // Les ressources
-        { id: 'a', groupId:'Conducteurs', title: 'Joseph' , link:'lien.php'},
+        { id: 'a', groupId:'Conducteurs', title: 'Joseph' , link:'Carte_identite.pdf'},
         { id: 'a2', groupId:'Conducteurs', title: 'Jack' },
-        { id: 'b', groupId:'Véhicules', title: 'Une belle 4L' },
-        { id: 'b2', groupId:'Véhicules', title: 'Une deudeuche' },
+        { id: 'b', groupId:'Véhicules', title: 'Camion 2T' },
+        { id: 'b2', groupId:'Véhicules', title: 'Fourgonnette' },
       ],
       events: [ //Les évènements et les ressources auquelles ils sont attribués
-        { id: '1', resourceId: 'a', start: '2018-04-07T02:00:00', end: '2018-04-07T07:00:00', title: 'event 1', timezone:'GMT+1' },
-        { id: '2', resourceId: 'a', start: '2018-04-07T05:00:00', end: '2018-04-07T22:00:00', title: 'event 2' },
-        { id: '3', resourceId: 'a2', start: '2018-04-06', end: '2018-04-08', title: 'event 3' },
-        { id: '4', resourceId: 'a2', start: '2018-04-07T03:00:00', end: '2018-04-07T08:00:00', title: 'event 4' },
-        { id: '5', resourceId: 'b', start: '2018-04-07T00:30:00', end: '2018-04-07T02:30:00', title: 'event 5' }
+        { id: '1', resourceId: 'a', start: '2019-02-28', end: '2019-03-02', title: 'Transport 1', timezone:'GMT+1' },
+        { id: '2', resourceId: 'a2', start: '2019-02-28', end: '2019-03-06', title: 'Transport 2', timezone:'GMT+1'  },
+        { id: '1b', resourceId: 'b', start: '2019-02-28', end: '2019-03-02', title: 'Transport 1', timezone:'GMT+1'  },
+        { id: '2b', resourceId: 'b2', start: '2019-02-28', end: '2019-03-06', title: 'Transport 2', timezone:'GMT+1'  },
       ],
       eventDrop: function(event, delta, revertFunc) {
-        alert(event.title + " was dropped on " + event.start.format());
+        /*alert(event.title + " was dropped on " + event.start.format());
         if (!confirm("Are you sure about this change?")) {
           revertFunc();
         }
+        else
+        {*/
+          var ev;
+          if(event.id.includes("b"))
+            ev = $('#calendar').fullCalendar('clientEvents').find(x => x.id === (event.id.replace("b","")));
+          else
+            ev = $('#calendar').fullCalendar('clientEvents').find(x => x.id === (event.id+"b"));
+          ev.end = event.end;
+          ev.start = event.start;
+          $('#calendar').fullCalendar('updateEvent', ev);
+        //}
       },
 
       eventResize: function(event, delta, revertFunc) {
-        alert(event.title + " end is now " + event.end.format());
-        if (!confirm("is this okay?")) {
+        //alert(event.title + " end is now " + event.end.format());
+        /*if (!confirm("is this okay?")) {
           revertFunc();
         }
+        else
+        {*/
+          var ev;
+          if(event.id.includes("b"))
+            ev = $('#calendar').fullCalendar('clientEvents').find(x => x.id === (event.id.replace("b","")));
+          else
+            ev = $('#calendar').fullCalendar('clientEvents').find(x => x.id === (event.id+"b"));
+          ev.end = event.end;
+          ev.start = event.start;
+          $('#calendar').fullCalendar('updateEvent', ev);
+        //}
       },
 
       resourceRender: function(resourceObj, labelTds, bodyTds) {
